@@ -1,18 +1,22 @@
 #include "main.h"
-
 /**
- * _isupper - checks if parameter is an uppercase character.
- * @c: input character.
- * Return: 1 if is an uppercase character, 0 in other case.
+ * _isupper - This function will return
+ *
+ * @c: Description of parameter
+ * Return: 1 If alphabet is lower
  */
 int _isupper(int c)
 {
-	if (c >= 65 && c <= 90)
+	int result;
+
+	if ((c >= 'A') && (c <= 'Z'))
 	{
-		return (1);
+		result = 1;
 	}
 	else
 	{
-		return (0);
+		result = 0;
 	}
+
+	return (result);
 }
