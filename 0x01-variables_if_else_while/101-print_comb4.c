@@ -2,34 +2,33 @@
 
 /**
  * main - prints all possible different combinations of three digits
- *
- * Return: 0 - Success
+ * Return: Always 0 (Success)
  */
+
 int main(void)
 {
-	int i, o, u;
+	int one;
+	int ten;
+	int hundred;
 
-	for (i = '0'; i <= '9'; i++)
+	for (hundred = '0'; hundred <= '9'; hundred++) /*hundreds place*/
 	{
-		for (o = i + 1; o <= '9'; o++)
+		for (ten = (hundred + 1); ten <= '9'; ten++) /*tens=100s+1*/
 		{
-			for (u = o + 1; u <= '9'; u++)
+			for (one = (ten + 1); one <= '9'; one++) /*ones*/
 			{
-				if ((o != i) && (u != o))
+				putchar(hundred);
+				putchar(ten);
+				putchar(one);
+				if (hundred != '7' || ten != '8' || one != '9')
 				{
-					putchar(i);
-					putchar(o);
-					putchar(u);
-
-					if (i == '7' && o == '8')
-						continue;
-
 					putchar(',');
-					putchar(',');
+					putchar(' ');
 				}
 			}
 		}
 	}
 	putchar('\n');
+
 	return (0);
 }
