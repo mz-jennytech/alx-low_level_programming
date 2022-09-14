@@ -1,9 +1,9 @@
-#include "main.h"
+include "main.h"
 
 /**
  * main - a program that prints _putchar
  *
- * Return: 0 - success
+ * Return: 0 - success.
  */
 int main(void)
 {
