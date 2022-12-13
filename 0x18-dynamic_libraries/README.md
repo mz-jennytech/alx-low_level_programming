@@ -1,5 +1,5 @@
-## C - Dynamic libraries
-objective: 
+# Dynamic libraries
+### objective: 
 
 * Creating a dynamic library for a list of functions
 
