@@ -1,8 +1,6 @@
-# Dynamic libraries
-### Objective:
-* Creating a dynamic library for a list of functions
-
-* Create a script that creates a dynamic library called liball.so from all the
-* c files that are in the current directory.
-
-# Create a dynamic library that contains C functions that can be called from Python.
+# 0x1E. C - Search Algorithms
+## Learning objectives:
+* What is a search algorithm
+* What is a linear search
+* What is a binary search
+* What is the best search algorithm to use depending on your needs
