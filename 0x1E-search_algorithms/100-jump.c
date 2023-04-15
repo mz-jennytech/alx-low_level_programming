@@ -1,80 +1,58 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "search_algos.h"
 #include <math.h>
 
+/* remember compiling math.h with gcc requires `-lm` */
+
+size_t min(size_t a, size_t b);
 
 /**
- * linear_search2 - searches for a value in a array of integers.
- * @array: pointer to the array
- * @size: size of the array
- * @value: value to search
- * @imin: index
- * Return: the pointer to a new node at the beginning of a dlistint_t list
+ * min - returns the minimum of two size_t values
+ * @a: first value
+ * @b: second value
+ *
+ * Return: `a` if lower or equal to `b`, `b` otherwise
  */
-int linear_search2(int *array, size_t size, int value, int imin)
+size_t min(size_t a, size_t b)
 {
-	size_t i = 0;
-
-	if (array == NULL)
-		return (-1);
-	for (i = 0; i < size; i++)
-	{
-		printf("Value checked array[%d] = [%d]\n", imin, array[i]);
-		if (value == array[i])
-			return (imin);
-		imin = imin + 1;
-	}
-	return (-1);
+	return (a <= b ? a : b);
 }
 
-
 /**
- * jump_search - searches for a value in a array of integers.
- * @array: pointer to the array
- * @size: size of the array
- * @value: value to search
- * Return: the index of the value founded
+ * jump_search - searches for a value in a sorted array of integers using
+ * a jump search algorithm
+ * @array: pointer to first element of array to search
+ * @size: number of elements in array
+ * @value: value to search for
+ *
+ * Return: first index containing `value`, or -1 if `value` not found or
+ * `array` is NULL
  */
+
 int jump_search(int *array, size_t size, int value)
 {
-	size_t i = 0;
-	int jump = 0,  imax = 0, imin = 0, j = 0, z = 0, idxanterior = 0, array2[500];
+	size_t low, high, jump;
 
-	if (!array || !size)
+	if (!array || size == 0)
 		return (-1);
+
 	jump = sqrt(size);
-	for (i = 0; i < size;)
+
+	for (high = 0; high < size && array[high] < value;
+	     low = high, high += jump)
 	{
-		if (array[i] < value)
-			printf("Value checked array[%d] = [%d]\n", (int)i, array[i]);
-		if (array[i] >= value || i == size - 1)
-		{
-			if (i == size - 1)
-			{
-				imax = i + jump;
-				imin = i;
-				z = imin; } else
-			{
-				imax = i;
-				imin = idxanterior;
-				z = imin; }
-			if (i == size - 1)
-			{
-				for (j = 0; j < imin; j++)
-				{
-					array2[j] = array[z];
-					z = z + 1; }} else
-			{
-				for (j = 0; j < imax; j++)
-				{ array2[j] = array[z];
-					z = z + 1; }}
-			if (i == size - 1)
-			{ printf("Value found between indexes [%d] and [%d]\n", imin, imax);
-				return (linear_search2(array2, 1, value, imin)); }
-			printf("Value found between indexes [%d] and [%d]\n", imin, imax);
-			return (linear_search2(array2, jump + 1, value, imin)); }
-		idxanterior = i;
-		i = i + jump; }
+		printf("Value checked array[%lu] = [%d]\n",
+		       high, array[high]);
+	}
+
+	/* causes 'found' msg even when value not in array */
+	printf("Value found between indexes [%lu] and [%lu]\n", low, high);
+
+	for (; low <= min(high, size - 1); low++)
+	{
+		printf("Value checked array[%lu] = [%d]\n", low, array[low]);
+		if (array[low] == value)
+			return (low);
+	}
+
 	return (-1);
 }
